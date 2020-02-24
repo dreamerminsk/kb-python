@@ -13,5 +13,4 @@ def get_page(ref):
         return None, ex
 
 
-page, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
-doc = BeautifulSoup(page.text, 'html.parser')
+doc, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
