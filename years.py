@@ -14,3 +14,4 @@ def get_page(ref):
 
 
 doc, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
+print(doc)
