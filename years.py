@@ -1,9 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-s = requests.Session()
-
-
 def get_page(ref):
     try:
         r = s.get(ref, timeout=24)
@@ -12,8 +9,9 @@ def get_page(ref):
     except Exception as ex:
         return None, ex
 
-
+s = requests.Session()
 doc, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
-print(doc)
 rows = doc.select('table.calendar_year tr')
-print(rows)
+for row in rows[1:]:
+    row.select('td')
+
