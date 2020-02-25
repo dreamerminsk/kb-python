@@ -18,3 +18,4 @@ print(doc)
 rows = doc.select('table.calendar_year tr')
 for row in rows[1:]:
     print(row)
+    cells = row.select('td')
