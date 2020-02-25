@@ -16,4 +16,5 @@ def get_page(ref):
 doc, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
 print(doc)
 rows = doc.select('table.calendar_year tr')
-print(rows)
+for row in rows[1:]:
+    print(row)
