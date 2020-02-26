@@ -1,12 +1,17 @@
+import sqlite3
+
 import requests
 from bs4 import BeautifulSoup
+
+conn = sqlite3.connect("kb.db")
+cursor = conn.cursor()
 
 
 def get_page(ref):
     try:
         r = s.get(ref, timeout=24)
-        doc = BeautifulSoup(r.text, 'html.parser')
-        return doc, None
+        html = BeautifulSoup(r.text, 'html.parser')
+        return html, None
     except Exception as ex:
         return None, ex
 
