@@ -11,8 +11,8 @@ cursor.execute('CREATE TABLE IF NOT EXISTS `kb-films` (`id` INTEGER PRIMARY KEY,
 
 def get_page(ref):
     try:
-        r = s.get(ref, timeout=24)
-        html = BeautifulSoup(r.text, 'html.parser')
+        res = s.get(ref, timeout=24)
+        html = BeautifulSoup(res.text, 'html.parser')
         return html, None
     except Exception as ex:
         return None, ex
@@ -21,6 +21,17 @@ def get_page(ref):
 s = requests.Session()
 doc, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
 rows = doc.select('table.calendar_year tr')
+
+
+def save_film(f):
+    try:
+        cursor.execute('INSERT INTO `kb-films`(id,title,original,page) VALUES(?,?,?,?)',
+                       [f['id'], f['title'], f['original'], f['page']])
+        conn.commit()
+    except Exception as e:
+        print(e)
+
+
 for row in rows[1:]:
     cells = row.select('td')
     film = {}
@@ -50,10 +61,4 @@ for row in rows[1:]:
             print('\tspectaculars: ' + cell.text)
         if index == 8:
             print('\tdays: ' + cell.text)
-    try:
-        r = cursor.execute('INSERT INTO `kb-films`(id,title,original,page) VALUES(?,?,?,?)',
-                           [film['id'], film['title'], film['original'], film['page']])
-        conn.commit()
-        print(r)
-    except Exception as e:
-        print(e)
+    save_film(film)
