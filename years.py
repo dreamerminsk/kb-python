@@ -29,3 +29,17 @@ for row in rows[1:]:
             print('\ttitle: ', cell.text)
             print('\tpage: ', cell.select_one('a')['href'])
             print('\tname: ', cell.select_one('a')['name'])
+        if index == 2:
+            print('\toriginal: ' + cell.text)
+        if index == 3:
+            print('\tdistributor: ' + cell.text)
+        if index == 4:
+            print('\tscreens: ' + cell.text)
+        if index == 5:
+            print('\ttotalRur: ' + cell.text)
+        if index == 6:
+            print('\ttotalUsd: ' + cell.text)
+        if index == 7:
+            print('\tspectaculars: ' + cell.text)
+        if index == 8:
+            print('\tdays: ' + cell.text)
