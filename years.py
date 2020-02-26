@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 
 conn = sqlite3.connect("kb.db")
 cursor = conn.cursor()
+cursor.execute('CREATE TABLE IF NOT EXISTS `kb-films` (`id` INTEGER PRIMARY KEY, `title` TEXT, original TEXT, '
+               '`page` TEXT)')
 
 
 def get_page(ref):
