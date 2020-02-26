@@ -23,3 +23,9 @@ for row in rows[1:]:
     cells = row.select('td')
     for index, cell in enumerate(cells):
         print(index, cell)
+        if index == 0:
+            print('\tpos: ', cell.text)
+        if index == 1:
+            print('\ttitle: ', cell.text)
+            print('\tpage: ', cell.select_one('a')['href'])
+            print('\tname: ', cell.select_one('a')['name'])
