@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-s = requests.Session()
-
 
 def get_page(ref):
     try:
@@ -13,9 +11,9 @@ def get_page(ref):
         return None, ex
 
 
+s = requests.Session()
 doc, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
-print(doc)
 rows = doc.select('table.calendar_year tr')
 for row in rows[1:]:
-    print(row)
-    cells = row.select('td')
+    cell: object = row.select('td')
+    print(cell)
