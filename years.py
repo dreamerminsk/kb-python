@@ -1,43 +1,10 @@
 from kb import urls
 from net import get_page
-from store import conn
-
-
-def num(text):
-    return text.replace(' ', '').replace('*', '')
-
+from store import save_film, save_boxoffice
+from utils import num
 
 doc, err = get_page(urls['year'])
 rows = doc.select('table.calendar_year tr')
-
-
-def save_film(f):
-    try:
-        conn.execute('INSERT INTO `kb-films`(id,title,original,page) VALUES(?,?,?,?)',
-                     [f['id'], f['title'], f['original'], f['page']])
-        conn.commit()
-    except Exception as e:
-        print(e)
-
-
-def save_boxoffioce(b):
-    try:
-        conn.execute(
-            'INSERT INTO `kb-years`(film,distributor,pos,total_rur, total_usd,screens,spectaculars,days) '
-            'VALUES(?,?,?,?,?,?,?,?)',
-            [b['film'], b['distributor'], b['pos'], b['total_rur'], b['total_usd'], b['screens'], b['spectaculars'],
-             b['days']])
-        conn.commit()
-    except Exception as e:
-        print(e)
-        try:
-            conn.execute(
-                'UPDATE `kb-years` SET pos=?,total_rur=?, total_usd=?,screens=?,spectaculars=?,days=? WHERE film=?',
-                [b['pos'], b['total_rur'], b['total_usd'], b['screens'], b['spectaculars'], b['days'], b['film']])
-            conn.commit()
-        except Exception as e:
-            print(e)
-
 
 for row in rows[1:]:
     cells = row.select('td')
@@ -78,4 +45,4 @@ for row in rows[1:]:
             print('\tdays: ' + cell.text)
             boxoffice['days'] = num(cell.text)
     save_film(film)
-    save_boxoffioce(boxoffice)
+    save_boxoffice(boxoffice)
