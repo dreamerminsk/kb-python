@@ -1,1 +1,1 @@
-from . import urls as urls
+from .pages import urls

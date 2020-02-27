@@ -7,7 +7,7 @@ def num(text):
     return text.replace(' ', '').replace('*', '')
 
 
-doc, err = get_page(urls.urls['year'])
+doc, err = get_page(urls['year'])
 rows = doc.select('table.calendar_year tr')
 
 
