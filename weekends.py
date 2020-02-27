@@ -2,6 +2,7 @@ from dateutil.parser import parse
 
 from kb import urls
 from net import get_page
+from store import save_weekend
 from utils import num
 
 doc, err = get_page(urls['weekends'])
@@ -24,3 +25,4 @@ for row in rows:
         if index == 3:
             print('\tfilms: ' + cell.text)
             weekend['films'] = num(cell.text)
+    save_weekend(weekend)
