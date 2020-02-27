@@ -1,3 +1,4 @@
+from kb import urls
 from net import get_page
 from store import conn
 
@@ -6,7 +7,7 @@ def num(text):
     return text.replace(' ', '').replace('*', '')
 
 
-doc, err = get_page('http://kinobusiness.com/kassovye_sbory/films_year/')
+doc, err = get_page(urls.urls['year'])
 rows = doc.select('table.calendar_year tr')
 
 
