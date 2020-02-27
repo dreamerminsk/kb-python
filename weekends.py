@@ -3,8 +3,8 @@ from net import get_page
 from store import conn
 
 doc, err = get_page(urls['weekends'])
-rows = doc.select('table.calendar_year tr')
-for row in rows[1:]:
+rows = doc.select('table.calendar_tbody year tr')
+for row in rows:
     cells = row.select('td')
     film = {}
     for index, cell in enumerate(cells):
