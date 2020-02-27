@@ -2,6 +2,7 @@ from dateutil.parser import parse
 
 from kb import urls
 from net import get_page
+from utils import num
 
 doc, err = get_page(urls['weekends'])
 rows = doc.select('table.calendar_year tbody tr')
@@ -19,6 +20,7 @@ for row in rows:
             weekend['weekend'] = parse(parts[-2])
         if index == 1:
             print('\ttotalRur: ' + cell.text)
-            weekend['total_rur'] = cell.text
+            weekend['total_rur'] = num(cell.text)
         if index == 3:
             print('\tfilms: ' + cell.text)
+            weekend['films'] = num(cell.text)
