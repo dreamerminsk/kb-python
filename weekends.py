@@ -18,7 +18,7 @@ for row in rows:
             print('\tpage: ', cell.select_one('a')['href'])
             weekend['page'] = cell.select_one('a')['href']
             parts = cell.select_one('a')['href'].split('/')
-            weekend['weekend'] = parse(parts[-2])
+            weekend['weekend'] = parse(parts[-2], dayfirst=True)
         if index == 1:
             print('\ttotalRur: ' + cell.text)
             weekend['total_rur'] = num(cell.text)
