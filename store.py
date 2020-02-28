@@ -48,3 +48,19 @@ def save_weekend(w):
             conn.commit()
         except Exception as e:
             print(e)
+
+
+def save_thursday(thursday):
+    try:
+        conn.execute('INSERT INTO `kb-thursdays`(thursday,title,page, total_rur) VALUES(?,?,?,?)',
+                     [thursday['weekend'], thursday['title'], thursday['page'], thursday['total_rur']])
+        conn.commit()
+    except Exception as e:
+        print(e)
+        try:
+            conn.execute(
+                'UPDATE `kb-thursdays` SET total_rur=? WHERE thursday=?',
+                [thursday['total_rur'], thursday['weekend']])
+            conn.commit()
+        except Exception as e:
+            print(e)
