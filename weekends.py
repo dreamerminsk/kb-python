@@ -7,6 +7,12 @@ from utils import num
 
 doc, err = get_page(urls['weekends'])
 rows = doc.select('table.calendar_year tbody tr')
+
+
+def parse_weekend(week):
+    pass
+
+
 for row in rows:
     cells = row.select('td')
     weekend = {}
@@ -26,3 +32,4 @@ for row in rows:
             print('\tfilms: ' + cell.text)
             weekend['films'] = num(cell.text)
     save_weekend(weekend)
+    parse_weekend(weekend)
