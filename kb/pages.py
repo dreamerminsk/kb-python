@@ -5,3 +5,7 @@ urls: Dict[str, str] = {
     'weekends': 'http://kinobusiness.com/kassovye_sbory/weekend/',
     'thursdays': 'http://kinobusiness.com/kassovye_sbory/thursday/'
 }
+
+
+def getweekend(date):
+    return '{0}{1}/{2}/'.format(urls['weekend'], date.strftime('%Y'), date.strftime('%d.%m.%Y'))
