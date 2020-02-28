@@ -19,10 +19,10 @@ def parse_weekend(week):
         boxoffice = {}
         for index, cell in enumerate(cells):
             print(index, cell)
-            if index == 0:
+            if index == 1:
                 print('\tpos: ', cell.text)
                 boxoffice['pos'] = cell.text
-            if index == 1:
+            if index == 3:
                 print('\ttitle: ', cell.text)
                 film['title'] = cell.text
                 print('\tpage: ', cell.select_one('a')['href'])
@@ -30,10 +30,10 @@ def parse_weekend(week):
                 print('\tname: ', cell.select_one('a')['name'])
                 film['id'] = cell.select_one('a')['name']
                 boxoffice['film'] = cell.select_one('a')['name']
-            if index == 2:
+            if index == 4:
                 print('\toriginal: ' + cell.text)
                 film['original'] = cell.text
-            if index == 3:
+            if index == 5:
                 print('\tdistributor: ' + cell.text)
                 boxoffice['distributor'] = cell.text
             if index == 4:
