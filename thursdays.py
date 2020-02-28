@@ -24,4 +24,4 @@ for row in rows:
             print('\ttotalRur: ' + cell.text)
             thursday['total_rur'] = num(cell.text)
     save_thursday(thursday)
-    print(thursday['title'])
+    print(thursday['thursday'])
