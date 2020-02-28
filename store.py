@@ -15,20 +15,22 @@ def save_film(f):
         print(e)
 
 
-def save_boxoffice(b):
+def save_boxoffice(boxoffice):
     try:
         conn.execute(
             'INSERT INTO `kb-years`(film,distributor,pos,total_rur, total_usd,screens,spectaculars,days) '
             'VALUES(?,?,?,?,?,?,?,?)',
-            [b['film'], b['distributor'], b['pos'], b['total_rur'], b['total_usd'], b['screens'], b['spectaculars'],
-             b['days']])
+            [boxoffice['film'], boxoffice['distributor'], boxoffice['pos'], boxoffice['total_rur'],
+             boxoffice['total_usd'], boxoffice['screens'], boxoffice['spectaculars'],
+             boxoffice['days']])
         conn.commit()
     except Exception as e:
         print(e)
         try:
             conn.execute(
                 'UPDATE `kb-years` SET pos=?,total_rur=?, total_usd=?,screens=?,spectaculars=?,days=? WHERE film=?',
-                [b['pos'], b['total_rur'], b['total_usd'], b['screens'], b['spectaculars'], b['days'], b['film']])
+                [boxoffice['pos'], boxoffice['total_rur'], boxoffice['total_usd'], boxoffice['screens'],
+                 boxoffice['spectaculars'], boxoffice['days'], boxoffice['film']])
             conn.commit()
         except Exception as e:
             print(e)
@@ -53,14 +55,14 @@ def save_weekend(weekend):
 def save_thursday(thursday):
     try:
         conn.execute('INSERT INTO `kb-thursdays`(thursday,title,page, total_rur) VALUES(?,?,?,?)',
-                     [thursday['weekend'], thursday['title'], thursday['page'], thursday['total_rur']])
+                     [thursday['thursday'], thursday['title'], thursday['page'], thursday['total_rur']])
         conn.commit()
     except Exception as e:
         print(e)
         try:
             conn.execute(
                 'UPDATE `kb-thursdays` SET total_rur=? WHERE thursday=?',
-                [thursday['total_rur'], thursday['weekend']])
+                [thursday['total_rur'], thursday['thursday']])
             conn.commit()
         except Exception as e:
             print(e)
