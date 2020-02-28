@@ -10,4 +10,5 @@ def get_page(ref):
         html = BeautifulSoup(r.text, 'html.parser')
         return html, None
     except Exception as ex:
+        print(ex)
         return None, ex
