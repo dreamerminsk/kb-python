@@ -34,17 +34,17 @@ def save_boxoffice(b):
             print(e)
 
 
-def save_weekend(w):
+def save_weekend(weekend):
     try:
         conn.execute('INSERT INTO `kb-weekends`(weekend,title,page, total_rur, films) VALUES(?,?,?,?,?)',
-                     [w['weekend'], w['title'], w['page'], w['total_rur'], w['films']])
+                     [weekend['weekend'], weekend['title'], weekend['page'], weekend['total_rur'], weekend['films']])
         conn.commit()
     except Exception as e:
         print(e)
         try:
             conn.execute(
                 'UPDATE `kb-weekends` SET total_rur=?,films=? WHERE weekend=?',
-                [w['total_rur'], w['films'], w['weekend']])
+                [weekend['total_rur'], weekend['films'], weekend['weekend']])
             conn.commit()
         except Exception as e:
             print(e)
