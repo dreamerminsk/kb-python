@@ -36,21 +36,21 @@ def parse_weekend(week):
             if index == 5:
                 print('\tdistributor: ' + cell.text)
                 boxoffice['distributor'] = cell.text
-            if index == 4:
+            if index == 6:
+                print('\tweekendRur: ' + cell.text)
+                boxoffice['weekend_rur'] = num(cell.text)
+            if index == 8:
                 print('\tscreens: ' + cell.text)
                 boxoffice['screens'] = num(cell.text)
-            if index == 5:
-                print('\ttotalRur: ' + cell.text)
-                boxoffice['total_rur'] = num(cell.text)
-            if index == 6:
-                print('\ttotalUsd: ' + cell.text)
-                boxoffice['total_usd'] = num(cell.text)
-            if index == 7:
-                print('\tspectaculars: ' + cell.text)
-                boxoffice['spectaculars'] = num(cell.text)
-            if index == 8:
+            if index == 10:
                 print('\tdays: ' + cell.text)
                 boxoffice['days'] = num(cell.text)
+            if index == 11:
+                print('\ttotalRur: ' + cell.text)
+                boxoffice['total_rur'] = num(cell.text)
+            if index == 12:
+                print('\tspectaculars: ' + cell.text)
+                boxoffice['spectaculars'] = num(cell.text)
         # save_film(film)
         # save_boxoffice(boxoffice)
 
