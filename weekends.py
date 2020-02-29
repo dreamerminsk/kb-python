@@ -12,46 +12,45 @@ def parse_weekend(week):
     print(getweekend(week['weekend']))
     time.sleep(4)
     d, e = get_page(getweekend(week['weekend']))
-    rows = d.select('table#krestable > tbody > tr')
-    for row in rows[1:]:
-        cells = row.select('td')
+    rs = d.select('table#krestable > tbody > tr')
+    for r in rs[1:]:
+        cs = r.select('td')
         film = {}
-        boxoffice = {}
-        boxoffice['weekend'] = week['weekend']
-        for index, cell in enumerate(cells):
-            print(index, cell)
-            if index == 1:
-                boxoffice['pos'] = cell.text
+        boxoffice = {'weekend': week['weekend']}
+        for idx, c in enumerate(cs):
+            print(idx, c)
+            if idx == 1:
+                boxoffice['pos'] = c.text
                 print('\tpos: ', boxoffice['pos'])
-            if index == 3:
-                print('\ttitle: ', cell.text)
-                film['title'] = cell.text
-                print('\tpage: ', cell.select_one('a')['href'])
-                film['page'] = cell.select_one('a')['href']
-                print('\tname: ', cell.select_one('a')['rel'])
-                film['id'] = cell.select_one('a')['rel']
-                boxoffice['film'] = cell.select_one('a')['rel']
-            if index == 4:
-                print('\toriginal: ' + cell.text)
-                film['original'] = cell.text
-            if index == 5:
-                print('\tdistributor: ' + cell.text)
-                boxoffice['distributor'] = cell.text
-            if index == 6:
-                print('\tweekendRur: ' + cell.text)
-                boxoffice['weekend_rur'] = num(cell.text)
-            if index == 8:
-                print('\tscreens: ' + cell.text)
-                boxoffice['screens'] = num(cell.text)
-            if index == 10:
-                print('\tdays: ' + cell.text)
-                boxoffice['days'] = num(cell.text)
-            if index == 11:
-                print('\ttotalRur: ' + cell.text)
-                boxoffice['total_rur'] = num(cell.text)
-            if index == 12:
-                print('\tspectaculars: ' + cell.text)
-                boxoffice['spectaculars'] = num(cell.text)
+            if idx == 3:
+                print('\ttitle: ', c.text)
+                film['title'] = c.text
+                print('\tpage: ', c.select_one('a')['href'])
+                film['page'] = c.select_one('a')['href']
+                print('\tname: ', c.select_one('a')['rel'])
+                film['id'] = c.select_one('a')['rel']
+                boxoffice['film'] = c.select_one('a')['rel']
+            if idx == 4:
+                print('\toriginal: ' + c.text)
+                film['original'] = c.text
+            if idx == 5:
+                print('\tdistributor: ' + c.text)
+                boxoffice['distributor'] = c.text
+            if idx == 6:
+                print('\tweekendRur: ' + c.text)
+                boxoffice['weekend_rur'] = num(c.text)
+            if idx == 8:
+                print('\tscreens: ' + c.text)
+                boxoffice['screens'] = num(c.text)
+            if idx == 10:
+                print('\tdays: ' + c.text)
+                boxoffice['days'] = num(c.text)
+            if idx == 11:
+                print('\ttotalRur: ' + c.text)
+                boxoffice['total_rur'] = num(c.text)
+            if idx == 12:
+                print('\tspectaculars: ' + c.text)
+                boxoffice['spectaculars'] = num(c.text)
         save_film(film)
         save_weekend_boxoffice(boxoffice)
 
