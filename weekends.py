@@ -4,7 +4,7 @@ from dateutil.parser import parse
 
 from kb import urls, getweekend
 from net import get_page
-from store import save_weekend
+from store import save_weekend, save_film, save_weekend_boxoffice
 from utils import num
 
 
@@ -13,11 +13,11 @@ def parse_weekend(week):
     time.sleep(4)
     d, e = get_page(getweekend(week['weekend']))
     rows = d.select('table#krestable tr')
-
     for row in rows[1:]:
         cells = row.select('td')
         film = {}
         boxoffice = {}
+        boxoffice['weekend'] = week['weekend']
         for index, cell in enumerate(cells):
             print(index, cell)
             if index == 1:
@@ -52,8 +52,8 @@ def parse_weekend(week):
             if index == 12:
                 print('\tspectaculars: ' + cell.text)
                 boxoffice['spectaculars'] = num(cell.text)
-        # save_film(film)
-        # save_boxoffice(boxoffice)
+        save_film(film)
+        save_weekend_boxoffice(boxoffice)
 
 
 doc, err = get_page(urls['weekends'])
