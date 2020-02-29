@@ -8,4 +8,4 @@ urls: Dict[str, str] = {
 
 
 def getweekend(date):
-    return '{0}{1}/{2}/'.format(urls['weekend'], date.strftime('%Y'), date.strftime('%d.%m.%Y'))
+    return '{0}{1}/{2}/'.format(urls['weekends'], date.strftime('%Y'), date.strftime('%d.%m.%Y'))

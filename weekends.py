@@ -1,3 +1,5 @@
+import time
+
 from dateutil.parser import parse
 
 from kb import urls, getweekend
@@ -10,8 +12,9 @@ rows = doc.select('table.calendar_year tbody tr')
 
 
 def parse_weekend(week):
-    doc, err = get_page(getweekend(week['weekend']))
-    rows = doc.select('table.calendar_year tr')
+    time.sleep(4)
+    d, e = get_page(getweekend(week['weekend']))
+    rows = d.select('table.calendar_year tr')
 
     for row in rows[1:]:
         cells = row.select('td')
