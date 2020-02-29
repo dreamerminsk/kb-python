@@ -12,7 +12,7 @@ def parse_weekend(week):
     print(getweekend(week['weekend']))
     time.sleep(4)
     d, e = get_page(getweekend(week['weekend']))
-    rows = d.select('table#krestable tr')
+    rows = d.select('table#krestable > tbody > tr')
     for row in rows[1:]:
         cells = row.select('td')
         film = {}
