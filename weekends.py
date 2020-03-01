@@ -12,11 +12,11 @@ def parse_weekend(week):
     print(getweekend(week['weekend']))
     time.sleep(4)
     d, e = get_page(getweekend(week['weekend']))
-    rs = d.select('table#krestable > tbody > tr')
+    rs = d.select('table#krestable tr')
     for r in rs[1:]:
         cs = r.select('td')
         film = {}
-        boxoffice = {'weekend': week['weekend']}
+        boxoffice = {'weekend': str(week['weekend'].date())}
         for idx, c in enumerate(cs):
             print(idx, c)
             if idx == 1:
@@ -28,8 +28,8 @@ def parse_weekend(week):
                 print('\tpage: ', c.select_one('a')['href'])
                 film['page'] = c.select_one('a')['href']
                 print('\tname: ', c.select_one('a')['rel'])
-                film['id'] = c.select_one('a')['rel']
-                boxoffice['film'] = c.select_one('a')['rel']
+                film['id'] = c.select_one('a')['rel'][0]
+                boxoffice['film'] = c.select_one('a')['rel'][0]
             if idx == 4:
                 print('\toriginal: ' + c.text)
                 film['original'] = c.text
