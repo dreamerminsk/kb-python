@@ -27,13 +27,13 @@ def parse_thursday(thday):
                 boxoffice['pos'] = c.text
                 print('\tpos: ', boxoffice['pos'])
             if idx == 1:
-                print('\ttitle: ', c.text)
                 film['title'] = c.text
-                print('\tpage: ', c.select_one('a')['href'])
+                print('\ttitle: ', film['title'])
                 film['page'] = c.select_one('a')['href']
-                print('\tname: ', c.select_one('a')['rel'])
+                print('\tpage: ', film['page'])
                 film['id'] = c.select_one('a')['rel'][0]
-                boxoffice['film'] = c.select_one('a')['rel'][0]
+                boxoffice['film'] = film['id']
+                print('\tname: ', film['id'])
             if idx == 2:
                 print('\tdistributor: ' + c.text)
                 boxoffice['distributor'] = c.text
