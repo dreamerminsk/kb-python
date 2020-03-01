@@ -55,18 +55,18 @@ def save_weekend(weekend):
 def save_weekend_boxoffice(boxoffice):
     try:
         conn.execute(
-            'INSERT INTO `kb-weekend-bos`(weekend,film,distributor,pos,weekend_rur, total_rur,screens,spectaculars,days) '
-            'VALUES(?,?,?,?,?,?,?,?,?)',
+            'INSERT INTO `kb-weekend-bos`(weekend,film,distributor,pos,weekend_rur, total_rur,screens,spectaculars,'
+            'days) VALUES(?,?,?,?,?,?,?,?,?)',
             [boxoffice['weekend'], boxoffice['film'], boxoffice['distributor'], boxoffice['pos'],
-             boxoffice['weekend_rur'],
-             boxoffice['total_rur'], boxoffice['screens'], boxoffice['spectaculars'],
+             boxoffice['weekend_rur'], boxoffice['total_rur'], boxoffice['screens'], boxoffice['spectaculars'],
              boxoffice['days']])
         conn.commit()
     except Exception as e:
         print(e)
         try:
             conn.execute(
-                'UPDATE `kb-weekend-bos` SET pos=?,weekend_rur=?, total_rur=?,screens=?,spectaculars=?,days=? WHERE film=? AND weekend=?',
+                'UPDATE `kb-weekend-bos` SET pos=?,weekend_rur=?, total_rur=?,screens=?,spectaculars=?,days=? WHERE '
+                'film=? AND weekend=?',
                 [boxoffice['pos'], boxoffice['weekend_rur'], boxoffice['total_rur'], boxoffice['screens'],
                  boxoffice['spectaculars'], boxoffice['days'], boxoffice['film'], boxoffice['weekend']])
             conn.commit()
@@ -85,6 +85,25 @@ def save_thursday(thursday):
             conn.execute(
                 'UPDATE `kb-thursdays` SET total_rur=? WHERE thursday=?',
                 [thursday['total_rur'], thursday['thursday']])
+            conn.commit()
+        except Exception as e:
+            print(e)
+
+
+def save_thursday_boxoffice(boxoffice):
+    try:
+        conn.execute(
+            'INSERT INTO `kb-thursday-bos`(thursday,film,distributor,pos,thursday_rur) '
+            'VALUES(?,?,?,?,?)',
+            [boxoffice['thursday'], boxoffice['film'], boxoffice['distributor'], boxoffice['pos'],
+             boxoffice['thursday_rur']])
+        conn.commit()
+    except Exception as e:
+        print(e)
+        try:
+            conn.execute(
+                'UPDATE `kb-thursday-bos` SET pos=?,thursday_rur=? WHERE film=? AND thursday=?',
+                [boxoffice['pos'], boxoffice['thursday_rur'], boxoffice['film'], boxoffice['thursday']])
             conn.commit()
         except Exception as e:
             print(e)

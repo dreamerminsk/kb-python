@@ -7,5 +7,9 @@ urls: Dict[str, str] = {
 }
 
 
-def getweekend(date):
+def get_weekend(date):
     return '{0}{1}/{2}/'.format(urls['weekends'], date.strftime('%Y'), date.strftime('%d.%m.%Y'))
+
+
+def get_thursday(date):
+    return '{0}{1}/{2}/'.format(urls['thursdays'], date.strftime('%Y'), date.strftime('%d.%m.%Y'))

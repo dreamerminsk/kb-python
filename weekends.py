@@ -2,16 +2,16 @@ import time
 
 from dateutil.parser import parse
 
-from kb import urls, getweekend
+from kb import urls, get_weekend
 from net import get_page
 from store import save_weekend, save_film, save_weekend_boxoffice
 from utils import num
 
 
 def parse_weekend(week):
-    print(getweekend(week['weekend']))
+    print(get_weekend(week['weekend']))
     time.sleep(4)
-    d, e = get_page(getweekend(week['weekend']))
+    d, e = get_page(get_weekend(week['weekend']))
     rs = d.select('table#krestable tr')
     for r in rs[1:]:
         cs = r.select('td')
