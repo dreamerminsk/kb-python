@@ -35,11 +35,11 @@ def parse_thursday(thday):
                 boxoffice['film'] = film['id']
                 print('\tname: ', film['id'])
             if idx == 2:
-                print('\tdistributor: ' + c.text)
                 boxoffice['distributor'] = c.text
+                print('\tdistributor: ' + boxoffice['distributor'])
             if idx == 3:
-                print('\tthursdayRur: ' + c.text)
                 boxoffice['thursday_rur'] = num(c.text)
+                print('\tthursdayRur: ' + boxoffice['thursday_rur'])
         save_film(film)
         save_thursday_boxoffice(boxoffice)
 
@@ -50,14 +50,15 @@ for row in rows:
     for index, cell in enumerate(cells):
         print(index, cell)
         if index == 0:
-            print('\ttitle: ', cell.text)
             thursday['title'] = cell.text
-            print('\tpage: ', cell.select_one('a')['href'])
+            print('\ttitle: ', thursday['title'])
             thursday['page'] = cell.select_one('a')['href']
+            print('\tpage: ', thursday['page'])
             parts = cell.select_one('a')['href'].split('/')
             thursday['thursday'] = parse(parts[-2], dayfirst=True)
+            print('\tthursday: ', thursday['thursday'])
         if index == 1:
-            print('\ttotalRur: ' + cell.text)
             thursday['total_rur'] = num(cell.text)
+            print('\ttotalRur: ' + thursday['total_rur'])
     save_thursday(thursday)
     parse_thursday(thursday)
