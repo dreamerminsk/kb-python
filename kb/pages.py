@@ -7,6 +7,10 @@ urls: Dict[str, str] = {
 }
 
 
+def get_movie(page):
+    return 'http://kinobusiness.com{0}'.format(page)
+
+
 def get_weekend(date):
     return '{0}{1}/{2}/'.format(urls['weekends'], date.strftime('%Y'), date.strftime('%d.%m.%Y'))
 
