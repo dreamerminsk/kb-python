@@ -1,9 +1,22 @@
 import sqlite3
+from typing import List, Any
 
 conn = sqlite3.connect("kb.db")
 
 conn.execute('CREATE TABLE IF NOT EXISTS `kb-films` (`id` INTEGER PRIMARY KEY, `title` TEXT, original TEXT, '
              '`page` TEXT)')
+
+
+def get_films():
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM `kb-films`")
+
+        rows: List[Any] = cur.fetchall()
+
+        return rows
+    except Exception as e:
+        print(e)
 
 
 def save_film(f):
