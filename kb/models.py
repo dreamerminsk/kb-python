@@ -10,6 +10,12 @@ class Movie:
 
 
 @dataclass
+class Person:
+    id: int
+    name: str
+
+
+@dataclass
 class Year:
     pass
 
