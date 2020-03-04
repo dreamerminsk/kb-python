@@ -7,6 +7,14 @@ conn.execute('CREATE TABLE IF NOT EXISTS `kb-films` (`id` INTEGER PRIMARY KEY, `
              '`page` TEXT)')
 
 
+def save_person(person):
+    try:
+        conn.execute('INSERT INTO `kb-persons`(full_name) VALUES(?)',
+                     [person.name])
+        conn.commit()
+    except Exception as e:
+        print(e)
+
 def get_films():
     try:
         cur = conn.cursor()

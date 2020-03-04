@@ -1,9 +1,11 @@
+from time import sleep
+
 from functional import seq
 
 from kb import get_movie
-from kb.models import Movie
+from kb.models import Movie, Person
 from net import get_page
-from store import get_films
+from store import get_films, save_person
 
 
 def pm(m):
@@ -11,12 +13,14 @@ def pm(m):
 
 
 def page(page):
+    sleep(4)
     doc, e = get_page(get_movie(page))
     actors = []
     for actor_item in doc.select('span[itemprop=actor]'):
+        save_person(Person(-1, actor_item.text))
         actors.append(actor_item.text)
     return actors
 
 
-movie = seq(get_films()).map(lambda m: pm(m)).map(lambda m: page(m.page)).first()
-print(movie)
+movies = seq(get_films()).map(lambda m: pm(m)).flat_map(lambda m: page(m.page)).to_list()
+print(movies)
