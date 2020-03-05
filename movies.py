@@ -17,8 +17,8 @@ def page(page):
     doc, e = get_page(get_movie(page))
     actors = []
     for actor_item in doc.select('span[itemprop=actor]'):
-        save_person(Person(-1, actor_item.text))
-        actors.append(actor_item.text)
+        save_person(Person(-1, actor_item.text.strip()))
+        actors.append(actor_item.text.strip())
     return actors
 
 
